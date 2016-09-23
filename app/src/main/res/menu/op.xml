@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+   <item android:id="@+id/difference"
+       android:title="DIFFERENCE"
+       app:showAsAction="never"
+       />
+    <item android:id="@+id/intersect"
+        android:title="INTERSECT"
+        app:showAsAction="never"/>
+    <item android:id="@+id/union"
+        android:title="UNION"
+        app:showAsAction="never"/>
+    <item android:id="@+id/xor"
+        android:title="XOR"
+        app:showAsAction="never"/>
+    <item android:id="@+id/reverse_difference"
+        android:title="REVERSE_DIFFERENCE"
+        app:showAsAction="never"/>
+</menu>

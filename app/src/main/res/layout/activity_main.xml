@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="xyz.johntsai.androiddaydayup.MainActivity">
+   <xyz.johntsai.androiddaydayup.customview.BoolCalView
+       android:id="@+id/customView"
+       android:layout_width="match_parent"
+       android:layout_height="400dp" />
+   <RadioButton
+       android:id="@+id/rbControl1"
+       android:layout_width="200dp"
+       android:layout_height="50dp"
+       android:text="控制点1"
+       />
+   <RadioButton
+       android:id="@+id/rbControl2"
+       android:layout_width="200dp"
+       android:layout_height="50dp"
+       android:text="控制点2"
+       />
+</LinearLayout>
