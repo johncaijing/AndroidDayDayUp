@@ -106,9 +106,8 @@ public class CircleRunView extends View {
         matrix.reset();
         float degree = (float) (Math.atan2(tan[1], tan[0]) * 180.0 / Math.PI);
 
-        matrix.postRotate(degree);
-        matrix.postTranslate(pos[0]+(pos[0]>0?bitmap.getWidth()/2:(-1*bitmap.getWidth()/2)), pos[1]
-           +(pos[1]>0?bitmap.getHeight()/2:(-1*bitmap.getHeight()/2)));
+        matrix.postRotate(degree,bitmap.getWidth()/2,bitmap.getHeight()/2);
+        matrix.postTranslate(pos[0]-bitmap.getWidth()/2, pos[1]-bitmap.getHeight()/2);
 
         canvas.drawPath(path, paint);
 
