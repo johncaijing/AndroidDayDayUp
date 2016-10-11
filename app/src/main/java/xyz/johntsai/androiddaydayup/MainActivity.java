@@ -1,17 +1,7 @@
 package xyz.johntsai.androiddaydayup;
 
-import android.graphics.Path;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.RadioButton;
-
-import xyz.johntsai.androiddaydayup.customview.BoolCalView;
-import xyz.johntsai.androiddaydayup.customview.CircleRunView;
-import xyz.johntsai.androiddaydayup.customview.CubicView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,19 +12,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final CircleRunView circleRunView = (CircleRunView) findViewById(R.id.customView);
-        circleRunView.startAnim();
+//        final TheSearchView view = (TheSearchView) findViewById(R.id.customView);
+//        view.setOnClickListener(new View.OnClickListener() {
+//           @Override
+//           public void onClick(View v) {
+//               if(view.isAnimating()){
+//                   view.stop();
+//               }else{
+//                   view.start();
+//               }
+//           }
+//       });
 
-
-        circleRunView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(circleRunView.isStart())
-                    circleRunView.stopAnim();
-                else
-                    circleRunView.startAnim();
-            }
-        });
+//        final CircleRunView circleRunView = (CircleRunView) findViewById(R.id.customView);
+//        circleRunView.startAnim();
+//
+//
+//        circleRunView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(circleRunView.isStart())
+//                    circleRunView.stopAnim();
+//                else
+//                    circleRunView.startAnim();
+//            }
+//        });
 
 //        view = (BoolCalView) findViewById(R.id.customView);
 

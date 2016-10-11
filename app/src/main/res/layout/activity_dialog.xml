@@ -3,23 +3,17 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="打电话给10086"
-        android:onClick="clickCall"
-        />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="获取通话记录"
-        android:onClick="clickCallLog"
+        android:onClick="showDialog"
+        android:text="show dialog"
         />
-
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="dismissDialog"
+        android:text="dismiss dialog"
+        />
 </LinearLayout>

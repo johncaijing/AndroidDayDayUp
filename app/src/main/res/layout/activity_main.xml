@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="xyz.johntsai.androiddaydayup.MainActivity">
-   <xyz.johntsai.androiddaydayup.customview.CircleRunView
+   <xyz.johntsai.androiddaydayup.customview.MatrixSetPolyToPolyView
        android:id="@+id/customView"
        android:layout_width="match_parent"
        android:layout_height="400dp" />

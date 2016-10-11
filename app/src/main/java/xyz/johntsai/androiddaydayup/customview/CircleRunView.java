@@ -17,7 +17,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.LinearInterpolator;
 
 import xyz.johntsai.androiddaydayup.R;
 
@@ -33,6 +32,8 @@ public class CircleRunView extends View {
     private ValueAnimator valueAnimator;
     private Matrix matrix;
     private Bitmap bitmap;
+
+    private Matrix gettedMatrix;
 
     private static int RADIUS = 300;
     private static float CIRCUMFERENCE = (float) (Math.PI * 2 * RADIUS);
@@ -69,6 +70,8 @@ public class CircleRunView extends View {
 
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.arrow, options);
 
+
+        gettedMatrix = new Matrix();
     }
 
     public CircleRunView(Context context, AttributeSet attrs) {
@@ -109,9 +112,17 @@ public class CircleRunView extends View {
         matrix.postRotate(degree,bitmap.getWidth()/2,bitmap.getHeight()/2);
         matrix.postTranslate(pos[0]-bitmap.getWidth()/2, pos[1]-bitmap.getHeight()/2);
 
-        canvas.drawPath(path, paint);
+        Path result = new Path();
 
-        canvas.drawBitmap(bitmap, matrix, paint);
+        float stop = pathMeasure.getLength() ;
+        float start = pathMeasure.getLength()*currentDistance;
+        pathMeasure.getSegment(start,stop,result,true);
+
+        canvas.drawPath(result, paint);
+
+        gettedMatrix.preTranslate(-bitmap.getWidth()/2,-bitmap.getHeight()/2);
+
+        canvas.drawBitmap(bitmap, gettedMatrix, paint);
 
 
     }
@@ -133,6 +144,8 @@ public class CircleRunView extends View {
                     pathMeasure.getPosTan(currentDistance * CIRCUMFERENCE, pos, tan);
                     Log.d("aaa", "pos[0]=" + pos[0] + " pos[1]=" + pos[1]);
                     Log.d("aaa","tan[0]="+tan[0]+"tan[1]"+tan[1]);
+                    pathMeasure.getMatrix(currentDistance*CIRCUMFERENCE,gettedMatrix,PathMeasure.POSITION_MATRIX_FLAG|PathMeasure.TANGENT_MATRIX_FLAG);
+
                 }
                 invalidate();
             }
@@ -154,7 +167,7 @@ public class CircleRunView extends View {
 
     public void startAnim() {
         if (istart) return;
-        valueAnimator = startRunAnim(0, 1, 3000, new LinearInterpolator());
+        valueAnimator = startRunAnim(0, 1, 3000, new AccelerateDecelerateInterpolator());
         istart = true;
     }
 
