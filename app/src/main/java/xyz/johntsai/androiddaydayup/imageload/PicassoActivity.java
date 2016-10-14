@@ -3,22 +3,27 @@ package xyz.johntsai.androiddaydayup.imageload;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.LinearGradient;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.SeekBar;
 
-import com.squareup.picasso.Callback;
+import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Request;
+import com.squareup.picasso.RequestHandler;
+import com.squareup.picasso.StatsSnapshot;
 import com.squareup.picasso.Target;
+import com.squareup.picasso.Transformation;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.OkHttpClient;
 import xyz.johntsai.androiddaydayup.R;
 
 /**
@@ -67,9 +72,15 @@ public class PicassoActivity extends Activity {
         final ImageView imageView1 = new ImageView(this);
         imageView1.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
+        Picasso.with(context).setIndicatorsEnabled(true);
+        Picasso.with(context).setLoggingEnabled(true);
+
+        StatsSnapshot statsSnapshot = Picasso.with(context).getSnapshot();
+        Log.d("cj",statsSnapshot.toString());
+
         Picasso
                 .with(this)
-                .load("https://avatars0.githubusercontent.com/u/178706384?v=3&s=200")
+                .load("https://avatars0.githubusercontent.com/u/22720606?v=3&s=200")
                 .placeholder(R.mipmap.ic_launcher)
                 .rotate(45,100,100)
                 .error(R.drawable.arrow)
@@ -89,19 +100,27 @@ public class PicassoActivity extends Activity {
         linearLayout.addView(imageView3);
 
 
+        List<Transformation> transformationList = new ArrayList<>();
+//        transformationList.add(new BlurTransformation(context));
+        transformationList.add(new GrayscaleTransformation(Picasso.with(context)));
+
         Picasso
                 .with(this)
-                .load("http://img5.imgtn.bdimg.com/it/u=2945200961,993933618&fm=21&gp=0.jpg")
-                .priority(Picasso.Priority.HIGH)
+                .load(resourceId)
+                .transform(transformationList)
+//                .memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
+//                .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(imageView2);
 
 
         Picasso
                 .with(this)
                 .load(resourceId)
-                .transform(blurTransformation)
+                .transform(new jp.wasabeef.picasso.transformations.BlurTransformation(this,25))
                 .into(imageView3);
 
+
+        Log.d("cj",statsSnapshot.toString());
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -121,6 +140,36 @@ public class PicassoActivity extends Activity {
             }
         });
 
+
+
+        //通用的获取Picasso标准实例的方法
+        Picasso picasso = Picasso.with(context);
+
+
+        //获取Picasso自定义实例的方法
+        //自定义所需的Picasso组件化属性
+        Picasso.Builder builder = new Picasso.Builder(context);
+        Picasso localPicasso = builder
+                .downloader(new OkHttp3Downloader(new OkHttpClient()))
+                .addRequestHandler(new RequestHandler() {
+                    @Override
+                    public boolean canHandleRequest(Request data) {
+                        return false;
+                    }
+
+                    @Override
+                    public Result load(Request request, int networkPolicy) throws IOException {
+                        return null;
+                    }
+                })
+                .build();
+
+        //设置全局唯一实例
+        try {
+            Picasso.setSingletonInstance(localPicasso);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
 
     }
 

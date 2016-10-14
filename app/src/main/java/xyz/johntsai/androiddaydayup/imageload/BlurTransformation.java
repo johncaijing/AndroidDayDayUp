@@ -29,7 +29,8 @@ public class BlurTransformation implements Transformation {
     public Bitmap transform(Bitmap source) {
         Bitmap blurredBitmap = source.copy(Bitmap.Config.ARGB_8888,true);
 
-        Allocation input = Allocation.createFromBitmap(renderScript,blurredBitmap, Allocation.MipmapControl.MIPMAP_FULL,Allocation.USAGE_SHARED);
+        Allocation input = Allocation.createFromBitmap(renderScript,blurredBitmap,
+                Allocation.MipmapControl.MIPMAP_FULL,Allocation.USAGE_SHARED);
         Allocation output = Allocation.createTyped(renderScript,input.getType());
 
         ScriptIntrinsicBlur scriptIntrinsicBlur = ScriptIntrinsicBlur.create(renderScript, Element.U8_4(renderScript));
