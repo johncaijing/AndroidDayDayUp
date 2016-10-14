@@ -4,22 +4,18 @@
     android:layout_height="match_parent">
 
     <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="打电话给10086"
-        android:onClick="clickCall"
+        android:text="Button"
+        android:onClick="clickButton"
         />
 
-    <Button
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="获取通话记录"
-        android:onClick="clickCallLog"
-        />
+        android:src="@mipmap/ic_launcher"/>
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
 </LinearLayout>
